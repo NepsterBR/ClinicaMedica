@@ -3,7 +3,9 @@ package service;
 
 import dominio.Exame;
 import dominio.ExameEnum;
+import dominio.ExameGlicemia;
 import dominio.Laudo;
+import exceptions.NoClientException;
 import jakarta.inject.Inject;
 import view.TipoExame;
 
@@ -14,7 +16,12 @@ public class LaudoGlicemiaServiceImpl implements LaudoService {
     private Exame exame;
 
     @Override
-    public Exame realizarExame(Exame exame, Laudo laudo) {
+    public Exame realizarExame() {
+        Exame exame = new ExameGlicemia();
+        if (null == exame.getCliente()) {
+            throw new NoClientException("Cliente não cadastrado");
+        }
+
         return null;
     }
 

@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Exame {
+public abstract class Exame {
 
     private String nomeExame;
     private String idExame;

@@ -5,7 +5,7 @@ import dominio.Laudo;
 
 public interface LaudoService {
 
-    Exame realizarExame(Exame exame, Laudo laudo);
+    Exame realizarExame();
     Laudo emitirLaudo(Laudo laudo);
 
 }

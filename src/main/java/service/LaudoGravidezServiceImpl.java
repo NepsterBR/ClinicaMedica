@@ -9,14 +9,13 @@ import jakarta.inject.Inject;
 import view.TipoExame;
 
 @TipoExame(value = ExameEnum.GRAVIDEZ)
-public class ExameGravidezServiceImpl implements ExameService {
+public class LaudoGravidezServiceImpl implements LaudoService {
 
     @Inject
-    //private Exame exame;
     private Laudo laudo;
 
     @Override
-    public Exame realizarExame(Exame exame) {
+    public Exame realizarExame(Exame exame, Laudo laudo) {
         if (null == exame.getCliente()) {
             throw new NoClientException("Cliente não cadastrado");
         }
@@ -28,7 +27,7 @@ public class ExameGravidezServiceImpl implements ExameService {
     public Laudo emitirLaudo(Laudo laudo) {
         Exame exame = new ExameGravidez();
         // TODO implement rules
-        //((ExameGravidez) exame).isResultado()
+        ((ExameGravidez) exame).isResultado();
         return laudo;
     }
 }

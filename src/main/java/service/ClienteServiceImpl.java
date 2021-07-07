@@ -1,6 +1,6 @@
 package service;
 
-import dao.ClienteDao;
+import dao.LaudoDao;
 import dominio.Cliente;
 import jakarta.inject.Inject;
 
@@ -11,11 +11,11 @@ public class ClienteServiceImpl implements ClienteService{
 
 
     @Inject
-    private ClienteDao clienteDao;
+    private LaudoDao laudoDao;
 
     @Override
     public Cliente inserir(Cliente cliente) throws IOException {
         cliente.setCpf(UUID.randomUUID().toString());
-        return clienteDao.inserirArquivo(cliente);
+        return laudoDao.inserirArquivo(cliente);
     }
 }

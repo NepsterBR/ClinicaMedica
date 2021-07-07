@@ -14,14 +14,16 @@ import java.util.Optional;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
-public class ClienteDaoImpl implements ClienteDao {
+public class LaudoDaoImpl implements LaudoDao {
 
     final String caminhoDoArquivo = "src\\main\\java\\app\\br\\com\\letscode\\aplicacao\\arquivos\\";
     private Path path;
+
     @PostConstruct
     public void init(){
         path = Paths.get(caminhoDoArquivo);
     }
+
     @Override
     public Cliente inserirArquivo(Cliente cliente) throws IOException{
         try(BufferedWriter bf = Files.newBufferedWriter(path)){
@@ -58,4 +60,5 @@ public class ClienteDaoImpl implements ClienteDao {
         cliente.setNome(token.nextToken());
         return cliente;
     }
+
 }

@@ -1,4 +1,4 @@
-
+package view;
 
 import com.google.gson.Gson;
 import dominio.Cliente;

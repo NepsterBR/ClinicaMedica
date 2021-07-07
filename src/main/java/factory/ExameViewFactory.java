@@ -16,4 +16,5 @@ public class ExameViewFactory {
         final ExameViewAnnotationLiteral literal = new ExameViewAnnotationLiteral(exameEnum);
         return this.exameViewInstance.select(literal).get();
     }
+
 }

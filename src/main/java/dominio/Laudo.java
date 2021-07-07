@@ -1,16 +1,19 @@
 package dominio;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-@Setter
-@Getter
+@Data
 public class Laudo {
-    private Exame exame;
-    private String resultado;
+
     private Cliente cliente;
-    private Date data;
+    private Exame[] exames;
+    private LocalDate dataRealizacao;
+
+    public Laudo(Cliente cliente, Exame[] exames) {
+        this.cliente = cliente;
+        this.exames = exames;
+        this.dataRealizacao = LocalDate.now();
+    }
 }

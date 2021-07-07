@@ -7,13 +7,13 @@ import jakarta.inject.Inject;
 import view.TipoExame;
 
 @TipoExame(value = ExameEnum.CORTISOL)
-public class ExameCortisolServiveImpl implements ExameService {
+public class LaudoCortisolServiveImpl implements LaudoService {
 
     @Inject
     private Exame exame;
 
     @Override
-    public Exame realizarExame(Exame exame) {
+    public Exame realizarExame(Exame exame, Laudo laudo) {
         return null;
     }
 

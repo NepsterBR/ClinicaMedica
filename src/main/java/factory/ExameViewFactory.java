@@ -1,6 +1,7 @@
 package factory;
 
 import dominio.ExameEnum;
+
 import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;

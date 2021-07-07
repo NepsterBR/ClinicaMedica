@@ -4,7 +4,7 @@ import dominio.Cliente;
 import dominio.Exame;
 import dominio.ExameEnum;
 import dominio.Laudo;
-import factory.ExameViewFactory;
+import factory.ExameViewFactory;;
 import jakarta.inject.Inject;
 import service.LaudoService;
 

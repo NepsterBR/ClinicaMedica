@@ -11,13 +11,12 @@ public class ClienteViewImpl implements ClienteView {
     @Inject
     private ClienteDao clienteDao;
 
-    public void criarCliente(Cliente cliente){
-        var input = new Scanner(System.in);
+    public void criarCliente(Scanner input){
+        var cliente = new Cliente();
         System.out.print("Informe seu nome de usúario: ");
         cliente.setNome(input.next());
         System.out.printf("Informe a seu CPF %s: ", cliente.getNome());
         cliente.setCpf(input.next());
         clienteDao.criar(cliente);
-
     }
 }

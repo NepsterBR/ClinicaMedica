@@ -11,6 +11,7 @@ import view.TipoExame;
 
 import java.util.Random;
 
+
 @TipoExame(value = ExameEnum.COVID)
 public class LaudoCovidServiceImpl implements LaudoService {
 

@@ -5,6 +5,7 @@ import dominio.ExameCortisol;
 import dominio.ExameEnum;
 import dominio.Laudo;
 import exceptions.NoClientException;
+
 import jakarta.inject.Inject;
 import view.TipoExame;
 

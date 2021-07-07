@@ -2,6 +2,8 @@ package view;
 
 import dominio.Cliente;
 
+import java.util.Scanner;
+
 public interface ClienteView {
-    void criarCliente(Cliente cliente);
+    void criarCliente(Scanner input);
 }

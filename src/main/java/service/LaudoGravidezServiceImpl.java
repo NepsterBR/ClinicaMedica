@@ -8,6 +8,7 @@ import dominio.Laudo;
 import dominio.SexoEnum;
 import exceptions.NoClientException;
 import exceptions.WrongSexException;
+
 import jakarta.inject.Inject;
 import view.TipoExame;
 

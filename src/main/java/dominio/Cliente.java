@@ -5,7 +5,8 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class Paciente {
+public class Cliente {
+    String Identificador;
     String nome;
     String cpf;
 }

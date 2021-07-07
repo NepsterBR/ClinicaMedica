@@ -8,6 +8,6 @@ import lombok.Setter;
 public class Laudo {
     Exame resultado;
     String descricao;
-    Paciente nome;
-    Paciente cpf;
+    Cliente nome;
+    Cliente cpf;
 }

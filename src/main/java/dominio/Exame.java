@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Exame {
-    Paciente nome;
-    Paciente cpf;
+    Cliente nome;
+    Cliente cpf;
     String resultado;
 }

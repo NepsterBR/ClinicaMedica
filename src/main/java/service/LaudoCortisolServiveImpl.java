@@ -8,23 +8,35 @@ import exceptions.NoClientException;
 import jakarta.inject.Inject;
 import view.TipoExame;
 
+import java.util.Random;
+
 @TipoExame(value = ExameEnum.CORTISOL)
 public class LaudoCortisolServiveImpl implements LaudoService {
 
     @Inject
     private Exame exame;
 
+    // Valores de referência para cortisol plasmático: manhã: 8,7 a 22 ug/dL; tarde: <10 ug/dL
     @Override
     public Exame realizarExame() {
-        Exame exame = new ExameCortisol();
+        ExameCortisol exame = new ExameCortisol();
         if (null == exame.getCliente()) {
             throw new NoClientException("Cliente não cadastrado");
+        } else {
+            var random = new Random();
+            exame.setResultado(random.nextFloat() * getRandomNumber(1, 30));
+            return exame;
         }
-        return null;
     }
 
     @Override
-    public Laudo emitirLaudo(Laudo laudo) {
+    public Laudo emitirLaudo() {
         return null;
     }
+
+    public int getRandomNumber(int min, int max) {
+        return (int) (Math.random() * (max - min)) + min;
+    }
+
+
 }

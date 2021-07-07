@@ -1,3 +1,0 @@
-01,Covid
-02,Glicemia
-03,Gravidez

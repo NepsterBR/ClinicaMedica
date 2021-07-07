@@ -11,4 +11,3 @@ public class CustomMessage {
     private String message;
 
 }
-}

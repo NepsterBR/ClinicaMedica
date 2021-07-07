@@ -3,10 +3,13 @@ package dominio;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Setter
 @Getter
 public class Cliente {
-    String Identificador;
     String nome;
     String cpf;
+    List<Laudo> laudos;
+    List<Ficha> fichas;
 }

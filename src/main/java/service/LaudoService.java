@@ -2,6 +2,7 @@ package service;
 
 import dominio.Exame;
 import dominio.Laudo;
+import dominio.SexoEnum;
 
 public interface LaudoService {
 

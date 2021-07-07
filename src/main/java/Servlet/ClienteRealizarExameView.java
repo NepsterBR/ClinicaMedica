@@ -1,4 +1,4 @@
-package view;
+package Servlet;
 
 import dominio.Cliente;
 import dominio.Exame;

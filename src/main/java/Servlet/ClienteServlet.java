@@ -1,4 +1,4 @@
-package view;
+package Servlet;
 
 import com.google.gson.Gson;
 import dominio.Cliente;

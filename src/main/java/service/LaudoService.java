@@ -7,6 +7,6 @@ import dominio.SexoEnum;
 public interface LaudoService {
 
     Exame realizarExame();
-    Laudo emitirLaudo(Laudo laudo);
+    Laudo emitirLaudo();
 
 }

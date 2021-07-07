@@ -1,5 +1,6 @@
 package service;
 
+import dominio.Cliente;
 import dominio.Exame;
 import dominio.ExameEnum;
 import dominio.ExameGravidez;
@@ -27,7 +28,7 @@ public class LaudoGravidezServiceImpl implements LaudoService {
             if (exame.getCliente().getSexo() != SexoEnum.FEMININO) {
                 throw new WrongSexException("O cliente não pode realizar o exame indicado.");
             }
-            Random random = new Random();
+            var random = new Random();
             exame.setResultado(random.nextBoolean());
             System.out.println("Exame de gravidez realizado com sucesso");
             return exame;
@@ -35,10 +36,15 @@ public class LaudoGravidezServiceImpl implements LaudoService {
     }
 
     @Override
-    public Laudo emitirLaudo(Laudo laudo) {
-        Exame exame = new ExameGravidez();
-        // TODO implement rules
-        ((ExameGravidez) exame).isResultado();
+    public Laudo emitirLaudo() {
+        ExameGravidez exame = new ExameGravidez();
+        Cliente cliente = new Cliente();
+        if (null == exame.getCliente()) {
+            throw new NoClientException("Cliente não cadastrado");
+        } else {
+        var laudo = new Laudo(cliente, Exame[]);
+
+        //((ExameGravidez) exame).isResultado();
         return laudo;
     }
 }

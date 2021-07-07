@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Exame {
-    Cliente nome;
-    Cliente cpf;
-    String resultado;
+    private String nome;
+    private String id;
+    private String parametros;
 }

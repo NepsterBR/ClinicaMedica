@@ -48,13 +48,12 @@ public class ClienteDaoImpl implements ClienteDao {
     }
 
     private String format(Cliente cliente){
-        return String.format("%s;%s;%s \r\n",cliente.getCpf(),cliente.getCpf(), cliente.getNome());
+        return String.format("%s;%s;%s \r\n",cliente.getCpf(), cliente.getNome());
     }
 
     private Cliente convert(String linha) {
         StringTokenizer token = new StringTokenizer(linha, ";");
         Cliente cliente = new Cliente();
-        cliente.setCpf((token.nextToken()));
         cliente.setCpf(token.nextToken());
         cliente.setNome(token.nextToken());
         return cliente;

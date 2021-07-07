@@ -1,13 +1,16 @@
 package dominio;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Date;
 
 @Setter
 @Getter
 public class Laudo {
-    Exame resultado;
-    String descricao;
-    Cliente nome;
-    Cliente cpf;
+    private Exame exame;
+    private String resultado;
+    private Cliente cliente;
+    private Date data;
 }

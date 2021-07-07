@@ -15,7 +15,7 @@ public class ClienteServiceImpl implements ClienteService{
 
     @Override
     public Cliente inserir(Cliente cliente) throws IOException {
-        cliente.setIdentificador(UUID.randomUUID().toString());
+        cliente.setCpf(UUID.randomUUID().toString());
         return clienteDao.inserirArquivo(cliente);
     }
 }

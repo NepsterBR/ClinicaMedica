@@ -1,10 +1,8 @@
 package service;
 
 import dao.LaudoDao;
-import dominio.Cliente;
 import dominio.Exame;
 import dominio.ExameEnum;
-import dominio.ExameGlicemia;
 import dominio.ExameGravidez;
 import dominio.Laudo;
 import dominio.SexoEnum;
@@ -12,7 +10,6 @@ import exceptions.NoClientException;
 import exceptions.WrongSexException;
 
 import jakarta.inject.Inject;
-import view.TipoExame;
 
 import java.util.Random;
 

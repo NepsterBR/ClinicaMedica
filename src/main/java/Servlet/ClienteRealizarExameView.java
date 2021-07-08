@@ -17,10 +17,10 @@ public class ClienteRealizarExameView {
     @Inject
     private ExameViewFactory exameViewFactory;
 
-    @Inject
+
     private LaudoService laudoService;
 
-    @Inject
+
     private Logger logger;
 
     public void realizarExame(ExameEnum exameEnum) {

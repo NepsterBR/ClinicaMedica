@@ -90,8 +90,7 @@ public class ClienteServlet extends HttpServlet {
     private PrintWriter prepareResponse(HttpServletResponse response) throws IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        PrintWriter print = response.getWriter();
-        return print;
+        return response.getWriter();
     }
 
     private StringBuilder getBody(HttpServletRequest request) throws IOException {

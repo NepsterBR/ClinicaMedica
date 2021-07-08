@@ -7,7 +7,6 @@ import dominio.ExameGlicemia;
 import dominio.Laudo;
 import exceptions.NoClientException;
 import jakarta.inject.Inject;
-import view.TipoExame;
 
 import java.util.Random;
 

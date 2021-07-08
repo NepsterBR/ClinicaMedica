@@ -7,7 +7,6 @@ dominio\Laudo.class
 dao\ClienteDao.class
 exceptions\WrongSexException.class
 service\LaudoService.class
-view\TipoExame.class
 view\ExameView.class
 Servlet\ClienteServlet.class
 service\ClienteServiceImpl.class
@@ -24,6 +23,7 @@ dao\LaudoDaoImpl.class
 view\ClienteView.class
 service\LaudoCortisolServiveImpl.class
 view\ExameViewImpl.class
+service\TipoExame.class
 dominio\Cliente.class
 factory\ExameViewFactory.class
 dominio\Exame.class

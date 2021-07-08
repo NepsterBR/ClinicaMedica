@@ -28,6 +28,6 @@ C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\view\ExameView.java
 C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\exceptions\WrongSexException.java
 C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\service\ClienteService.java
 C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\exceptions\NoClientException.java
-C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\view\TipoExame.java
+C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\service\TipoExame.java
 C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\service\LaudoGravidezServiceImpl.java
 C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\Servlet\ClienteRealizarExameView.java

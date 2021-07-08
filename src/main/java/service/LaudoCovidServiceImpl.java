@@ -1,19 +1,15 @@
 package service;
 
 import dao.LaudoDao;
-import dominio.Cliente;
 import dominio.Exame;
 import dominio.ExameCovid;
 import dominio.ExameEnum;
 
-import dominio.ExameGravidez;
 import dominio.Laudo;
 import exceptions.NoClientException;
 import jakarta.inject.Inject;
-import view.TipoExame;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Random;
 
 

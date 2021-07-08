@@ -3,7 +3,7 @@ package factory;
 import dominio.ExameEnum;
 
 import jakarta.enterprise.util.AnnotationLiteral;
-import view.TipoExame;
+import service.TipoExame;
 
 public class ExameViewAnnotationLiteral extends AnnotationLiteral<TipoExame> implements TipoExame {
 

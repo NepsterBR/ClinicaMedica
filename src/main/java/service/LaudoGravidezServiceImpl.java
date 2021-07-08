@@ -1,5 +1,6 @@
 package service;
 
+import dao.LaudoDao;
 import dominio.Cliente;
 import dominio.Exame;
 import dominio.ExameEnum;
@@ -17,7 +18,7 @@ import java.util.Random;
 public class LaudoGravidezServiceImpl implements LaudoService {
 
     @Inject
-    private Laudo laudo;
+    private LaudoDao laudoDao;
 
     @Override
     public Exame realizarExame() {
@@ -29,6 +30,9 @@ public class LaudoGravidezServiceImpl implements LaudoService {
                 throw new WrongSexException("O cliente não pode realizar o exame indicado.");
             }
             var random = new Random();
+            exame.setNomeExame("Teste de Gravidez");
+            exame.setIdExame("001");
+            exame.setParametros("Exame de sangue para a detecção de beta-HCG.");
             exame.setResultado(random.nextBoolean());
             System.out.println("Exame de gravidez realizado com sucesso");
             return exame;
@@ -38,13 +42,7 @@ public class LaudoGravidezServiceImpl implements LaudoService {
     @Override
     public Laudo emitirLaudo() {
         ExameGravidez exame = new ExameGravidez();
-        Cliente cliente = new Cliente();
-        if (null == exame.getCliente()) {
-            throw new NoClientException("Cliente não cadastrado");
-        } else {
-        var laudo = new Laudo(cliente, Exame[]);
-
-        //((ExameGravidez) exame).isResultado();
-        return laudo;
+        return laudoDao.getLaudo(exame);
     }
+
 }

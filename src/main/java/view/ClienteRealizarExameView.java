@@ -8,6 +8,7 @@ import factory.ExameViewFactory;
 import jakarta.inject.Inject;
 import service.LaudoService;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
@@ -24,8 +25,9 @@ public class ClienteRealizarExameView {
 
     public void realizarExame(ExameEnum exameEnum) {
         Cliente cliente = new Cliente();
+        ArrayList<Exame> exames = new ArrayList<Exame>();
         Exame exame = this.exameViewFactory.criar(exameEnum).criar();
-        Laudo laudo = new Laudo(cliente, new Exame[]{exame});
+        Laudo laudo = new Laudo(cliente, exames);
         System.out.println(Arrays.toString(this.logger.getHandlers()));
         this.laudoService.realizarExame();
     }

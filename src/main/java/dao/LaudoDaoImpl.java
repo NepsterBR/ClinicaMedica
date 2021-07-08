@@ -1,6 +1,9 @@
 package dao;
 
 import dominio.Cliente;
+import dominio.Exame;
+import dominio.Laudo;
+import exceptions.NoClientException;
 import jakarta.annotation.PostConstruct;
 
 import java.io.BufferedReader;
@@ -9,6 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.StringTokenizer;
@@ -47,6 +51,23 @@ public class LaudoDaoImpl implements LaudoDao {
         List<Cliente> clientes = getAll();
         return clientes.stream().filter(cliente -> cliente.getCpf().equals(cpf)).findFirst();
 
+    }
+
+    @Override
+    public Laudo getLaudo(Exame exame) {
+        Cliente cliente = new Cliente();
+        if (null == exame.getCliente()) {
+            throw new NoClientException("Cliente não cadastrado.");
+        } else {
+            if (cliente.equals(exame.getCliente())) {
+                ArrayList<Exame> exames = new ArrayList<Exame>();
+                Laudo laudo = new Laudo(cliente, exames);
+                exames.add(exame);
+                System.out.println("Exame adicinado ao laudo com sucesso");
+                return laudo;
+            }
+            throw new NoClientException("Cliente não encontrado.");
+        }
     }
 
     private String format(Cliente cliente){

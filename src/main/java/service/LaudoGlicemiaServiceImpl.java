@@ -1,6 +1,6 @@
 package service;
 
-
+import dao.LaudoDao;
 import dominio.Exame;
 import dominio.ExameEnum;
 import dominio.ExameGlicemia;
@@ -16,7 +16,7 @@ import java.util.Random;
 public class LaudoGlicemiaServiceImpl implements LaudoService {
 
     @Inject
-    private Exame exame;
+    private LaudoDao laudoDao;
 
     /** Valores de referência de glicemia em jejum: // LEVAR PARA O SERVLET
      *  hipoglicemia: valor < 70 mg/dL
@@ -31,6 +31,9 @@ public class LaudoGlicemiaServiceImpl implements LaudoService {
             throw new NoClientException("Cliente não cadastrado");
         } else {
             var random = new Random();
+            exame.setNomeExame("Exame de Glicemia");
+            exame.setIdExame("003");
+            exame.setParametros("Exame de sangue para a medição de glicose.");
             exame.setResultado(random.nextFloat() * getRandomNumber(100, 600));
             return exame;
         }
@@ -38,7 +41,8 @@ public class LaudoGlicemiaServiceImpl implements LaudoService {
 
     @Override
     public Laudo emitirLaudo() {
-        return null;
+        ExameGlicemia exame = new ExameGlicemia();
+        return laudoDao.getLaudo(exame);
     }
 
     public int getRandomNumber(int min, int max) {

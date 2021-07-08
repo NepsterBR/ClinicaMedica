@@ -1,7 +1,7 @@
 package dao;
 
 import dominio.Cliente;
-
+import jakarta.annotation.PostConstruct;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -16,30 +16,26 @@ import java.util.stream.Collectors;
 
 public class LaudoDaoImpl implements LaudoDao {
 
-//    final String caminhoDoArquivo = "src\\main\\java\\arquivo\\laudo.txt";
-//    private Path path;
-//
-//    @PostConstruct
-//    public void init() {
-//       this.path = Paths.get(caminhoDoArquivo);
-//    }
+    final String caminhoDoArquivo = "src\\main\\java\\app\\br\\com\\letscode\\aplicacao\\arquivos\\";
+    private Path path;
+
+    @PostConstruct
+    public void init(){
+        path = Paths.get(caminhoDoArquivo);
+    }
 
     @Override
-    public Cliente inserirArquivo(Cliente cliente) throws IOException {
-        final String caminhoDoArquivo = "src\\main\\java\\arquivo\\" + cliente.getCpf() + ".txt";
-        Path path = Paths.get(caminhoDoArquivo);
-        try (BufferedWriter bf = Files.newBufferedWriter(path)) {
+    public Cliente inserirArquivo(Cliente cliente) throws IOException{
+        try(BufferedWriter bf = Files.newBufferedWriter(path)){
             bf.write(format(cliente));
         }
         return cliente;
     }
 
     @Override
-    public List<Cliente> getAll() throws IOException {
-        final String caminhoDoArquivo = "src\\main\\java\\arquivo\\.txt";
-        Path path = Paths.get(caminhoDoArquivo);
+    public List<Cliente> getAll() throws IOException{
         List<Cliente> clientes;
-        try (BufferedReader br = Files.newBufferedReader(path)) {
+        try(BufferedReader br = Files.newBufferedReader(path)){
             clientes = br.lines().map(this::convert).collect(Collectors.toList());
             // List<String> identificadores = clientes.stream().map(Cliente::getIdentificador).collect(Collectors.toList());
         }
@@ -53,8 +49,8 @@ public class LaudoDaoImpl implements LaudoDao {
 
     }
 
-    private String format(Cliente cliente) {
-        return String.format("%s;%s;%s \r\n", cliente.getCpf(), cliente.getNome());
+    private String format(Cliente cliente){
+        return String.format("%s;%s;%s \r\n",cliente.getCpf(), cliente.getNome());
     }
 
     private Cliente convert(String linha) {

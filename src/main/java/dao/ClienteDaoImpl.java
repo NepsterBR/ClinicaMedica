@@ -1,6 +1,7 @@
 package dao;
 
 import dominio.Cliente;
+import dominio.SexoEnum;
 import jakarta.annotation.PostConstruct;
 
 import java.io.BufferedReader;
@@ -56,10 +57,25 @@ public class ClienteDaoImpl implements ClienteDao{
     private Cliente convert(String linha) {
         StringTokenizer token = new StringTokenizer(linha, ";");
         Cliente cliente = new Cliente();
-        cliente.setCpf(token.nextToken());
-        cliente.setNome(token.nextToken());
-        //TODO dar um jeito de tokenizar o sexo da pessoa
-//        cliente.setSexo(token.nextToken());
+//        cliente.setCpf(token.nextToken());
+//        cliente.setNome(token.nextToken());
+        // TODO dar um jeito de tokenizar o sexo da pessoa - ALTEREI: CHECAR SE FAZ SENTIDO (O ORIGINAL ESTÁ COMENTADO)
+        cliente.setCpf(token.nextToken(cliente.getCpf()));
+        cliente.setNome(token.nextToken(cliente.getNome()));
+        String sexo = token.nextToken(cliente.getSexo().toString());
+        cliente.setSexo(getEnumFromString(SexoEnum.class, sexo));
         return cliente;
     }
+
+    public static <T extends Enum<T>> T getEnumFromString(Class<T> c, String string) {
+        if( c != null && string != null ) {
+            try {
+                return Enum.valueOf(c, string.trim().toUpperCase());
+            } catch(IllegalArgumentException ex) {
+            }
+        }
+        return null;
+    }
+
+
 }

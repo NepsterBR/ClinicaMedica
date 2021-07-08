@@ -1,7 +1,10 @@
 package dao;
 
 import dominio.Cliente;
-import jakarta.annotation.PostConstruct;
+import dominio.Exame;
+import dominio.Laudo;
+import exceptions.NoClientException;
+
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -9,6 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.StringTokenizer;
@@ -16,26 +20,30 @@ import java.util.stream.Collectors;
 
 public class LaudoDaoImpl implements LaudoDao {
 
-    final String caminhoDoArquivo = "src\\main\\java\\app\\br\\com\\letscode\\aplicacao\\arquivos\\";
-    private Path path;
-
-    @PostConstruct
-    public void init(){
-        path = Paths.get(caminhoDoArquivo);
-    }
+//    final String caminhoDoArquivo = "src\\main\\java\\arquivo\\laudo.txt";
+//    private Path path;
+//
+//    @PostConstruct
+//    public void init() {
+//       this.path = Paths.get(caminhoDoArquivo);
+//    }
 
     @Override
-    public Cliente inserirArquivo(Cliente cliente) throws IOException{
-        try(BufferedWriter bf = Files.newBufferedWriter(path)){
+    public Cliente inserirArquivo(Cliente cliente) throws IOException {
+        final String caminhoDoArquivo = "src\\main\\java\\arquivo\\" + cliente.getCpf() + ".txt";
+        Path path = Paths.get(caminhoDoArquivo);
+        try (BufferedWriter bf = Files.newBufferedWriter(path)) {
             bf.write(format(cliente));
         }
         return cliente;
     }
 
     @Override
-    public List<Cliente> getAll() throws IOException{
+    public List<Cliente> getAll() throws IOException {
+        final String caminhoDoArquivo = "src\\main\\java\\arquivo\\.txt";
+        Path path = Paths.get(caminhoDoArquivo);
         List<Cliente> clientes;
-        try(BufferedReader br = Files.newBufferedReader(path)){
+        try (BufferedReader br = Files.newBufferedReader(path)) {
             clientes = br.lines().map(this::convert).collect(Collectors.toList());
             // List<String> identificadores = clientes.stream().map(Cliente::getIdentificador).collect(Collectors.toList());
         }
@@ -49,8 +57,25 @@ public class LaudoDaoImpl implements LaudoDao {
 
     }
 
-    private String format(Cliente cliente){
-        return String.format("%s;%s;%s \r\n",cliente.getCpf(), cliente.getNome());
+    @Override
+    public Laudo getLaudo(Exame exame) {
+            Cliente cliente = new Cliente();
+            if (null == exame.getCliente()) {
+                throw new NoClientException("Cliente não cadastrado.");
+            } else {
+                if (cliente.equals(exame.getCliente())) {
+                    ArrayList<Exame> exames = new ArrayList<Exame>();
+                    Laudo laudo = new Laudo(cliente, exames);
+                    exames.add(exame);
+                    System.out.println("Exame adicinado ao laudo com sucesso");
+                    return laudo;
+                }
+                throw new NoClientException("Cliente não encontrado.");
+            }
+    }
+
+    private String format(Cliente cliente) {
+        return String.format("%s;%s;%s \r\n", cliente.getCpf(), cliente.getNome());
     }
 
     private Cliente convert(String linha) {

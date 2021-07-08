@@ -3,6 +3,7 @@ package Servlet;
 import com.google.gson.Gson;
 import dominio.Cliente;
 import dominio.CustomMessage;
+import exceptions.NoClientException;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -26,42 +27,36 @@ public class ClienteServlet extends HttpServlet {
 
     @Inject
     private ClienteService clienteService;
+    private Gson gson;
 
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        gson = new Gson();
+    }
     @Override
     @SuppressWarnings("unchecked")
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        BufferedReader br = request.getReader();
-        String line="";
-        StringBuilder conteudo = new StringBuilder();
-        Gson gson = new Gson();
-        while(null!= (line= br.readLine())){
-            conteudo.append(line);
-        }
+        StringBuilder conteudo = getBody(request);
         Cliente clienteRequest = gson.fromJson(conteudo.toString(), Cliente.class);
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        PrintWriter print = response.getWriter();
+        PrintWriter print = prepareResponse(response);
         String resposta = "";
-        if(null==clienteRequest.getNome() || null==clienteRequest.getCpf()){
+        if (null == clienteRequest.getNome() || null == clienteRequest.getCpf()) {
             CustomMessage message = new CustomMessage(HttpServletResponse.SC_BAD_REQUEST, "Invalid Parameters");
             response.setStatus(message.getStatus());
-            resposta= gson.toJson(message);
-        }else{
-
-
-            HttpSession sessao = request.getSession(true);
-            List<Cliente> clientes;
-            if(null== (clientes= (List<Cliente>) sessao.getAttribute(CLIENTES_SESSION))){
-                clientes = new ArrayList<>();
+            resposta = gson.toJson(message);
+        } else {
+            try {
+                HttpSession sessao = request.getSession(true);
+                clienteService.inserir(clienteRequest);
+                List<Cliente> clientes = clienteService.listAll();
+                clientes.add(clienteRequest);
+                sessao.setAttribute(CLIENTES_SESSION, clientes);
+                resposta = gson.toJson(clientes);
+            } catch (NoClientException noClientException) {
+                response.setStatus(400);
+                resposta = gson.toJson(new CustomMessage(400, noClientException.getMessage()));
             }
-            clienteService.inserir(clienteRequest);
-            clientes.add(clienteRequest);
-            sessao.setAttribute(CLIENTES_SESSION, clientes);
-
-            resposta= gson.toJson(clientes);
-
-
-
         }
         print.write(resposta);
         print.close();
@@ -70,30 +65,43 @@ public class ClienteServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        final String cpfPesquisa =  request.getParameter("cpf");
+        final String cpfPesquisa = request.getParameter("cpf");
         HttpSession sessao = request.getSession();
-        List<Cliente> clientes = (List<Cliente>) sessao.getAttribute(CLIENTES_SESSION);
-        Gson gson = new Gson();
-        PrintWriter printWriter = response.getWriter();
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        if(null!=cpfPesquisa && Objects.nonNull(clientes)){
+        List<Cliente> clientes = new ArrayList<>();
+        if (Objects.nonNull((sessao.getAttribute(CLIENTES_SESSION)))) {
+            clientes.addAll((List<Cliente>) sessao.getAttribute(CLIENTES_SESSION));
+        }
+        PrintWriter printWriter = prepareResponse(response);
+        if (null != cpfPesquisa && Objects.nonNull(clientes)) {
             Optional<Cliente> optionalCliente = clientes.stream().filter(cliente -> cliente.getCpf().equals(cpfPesquisa)).findFirst();
-            if(optionalCliente.isPresent()){
-
+            if (optionalCliente.isPresent()) {
                 printWriter.write(gson.toJson(optionalCliente.get()));
-            }else{
-
+            } else {
                 CustomMessage message = new CustomMessage(404, "Conteúdo não encontrado");
                 response.setStatus(404);
                 printWriter.write(gson.toJson(message));
             }
-        }else {
-
+        } else {
             printWriter.write(gson.toJson(clientes));
-
         }
-
         printWriter.close();
+    }
+
+    private PrintWriter prepareResponse(HttpServletResponse response) throws IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter print = response.getWriter();
+        return print;
+    }
+
+    private StringBuilder getBody(HttpServletRequest request) throws IOException {
+        BufferedReader br = request.getReader();
+        String line = "";
+        StringBuilder conteudo = new StringBuilder();
+
+        while (null != (line = br.readLine())) {
+            conteudo.append(line);
+        }
+        return conteudo;
     }
 }

@@ -4,6 +4,7 @@ import dao.LaudoDao;
 import dominio.Cliente;
 import dominio.Exame;
 import dominio.ExameEnum;
+import dominio.ExameGlicemia;
 import dominio.ExameGravidez;
 import dominio.Laudo;
 import dominio.SexoEnum;
@@ -31,9 +32,6 @@ public class LaudoGravidezServiceImpl implements LaudoService {
                 throw new WrongSexException("O cliente não pode realizar o exame indicado.");
             }
             var random = new Random();
-            exame.setNomeExame("Teste de Gravidez");
-            exame.setIdExame("001");
-            exame.setParametros("Exame de sangue para a detecção de beta-HCG.");
             exame.setResultado(random.nextBoolean());
             System.out.println("Exame de gravidez realizado com sucesso");
             return exame;
@@ -45,5 +43,4 @@ public class LaudoGravidezServiceImpl implements LaudoService {
         ExameGravidez exame = new ExameGravidez();
         return laudoDao.getLaudo(exame);
     }
-
 }

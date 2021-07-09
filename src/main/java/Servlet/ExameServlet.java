@@ -3,6 +3,7 @@ package Servlet;
 import com.google.gson.Gson;
 import dominio.*;
 import exceptions.NoClientException;
+import factory.ExameViewFactory;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -42,22 +43,27 @@ public class ExameServlet extends HttpServlet {
         String cpf = request.getParameter("cpf");
         String exame = request.getParameter("exame");
         Exame exameRequest;
+        ExameEnum exameEnum = null;
         switch (exame) {
             case "COVID" :
                 exameRequest = gson.fromJson(conteudo.toString(), ExameCovid.class);
-                printResponse(request, response, cpf, exame, exameRequest);
+                exameEnum = ExameEnum.COVID;
+                printResponse(request, response, cpf, exame, exameRequest, exameEnum);
                 break;
             case "GRAVIDEZ" :
+                exameEnum = ExameEnum.GRAVIDEZ;
                 exameRequest = gson.fromJson(conteudo.toString(), ExameGravidez.class);
-                printResponse(request, response, cpf, exame, exameRequest);
+                printResponse(request, response, cpf, exame, exameRequest, exameEnum);
                 break;
             case "CORTISOL" :
+                exameEnum = ExameEnum.CORTISOL;
                 exameRequest = gson.fromJson(conteudo.toString(), ExameCortisol.class);
-                printResponse(request, response, cpf, exame, exameRequest);
+                printResponse(request, response, cpf, exame, exameRequest, exameEnum);
                 break;
            case "GLICEMIA" :
+                exameEnum = ExameEnum.GLICEMIA;
                 exameRequest = gson.fromJson(conteudo.toString(), ExameGlicemia.class);
-                printResponse(request, response, cpf, exame, exameRequest);
+                printResponse(request, response, cpf, exame, exameRequest, exameEnum);
                 break;
             default:
                 System.exit(0);
@@ -67,7 +73,7 @@ public class ExameServlet extends HttpServlet {
 
     }
 
-    private void printResponse(HttpServletRequest request, HttpServletResponse response, String cpf, String exame, Exame exameRequest) throws IOException {
+    private void printResponse(HttpServletRequest request, HttpServletResponse response, String cpf, String exame, Exame exameRequest, ExameEnum exameEnum) throws IOException {
         PrintWriter print = prepareResponse(response);
         String resposta = "";
         if (null == exame || null == cpf) {
@@ -77,7 +83,7 @@ public class ExameServlet extends HttpServlet {
         } else {
             try {
                 HttpSession sessao = request.getSession(true);
-                exameService.inserir(exameRequest, cpf);
+                exameService.inserir(exameRequest, cpf, exameEnum);
                 resposta = gson.toJson(exameRequest);
             } catch (NoClientException noClientException) {
                 response.setStatus(400);

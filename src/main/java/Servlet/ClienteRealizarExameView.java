@@ -29,7 +29,7 @@ public class ClienteRealizarExameView {
         Exame exame = this.exameViewFactory.criar(exameEnum).criar();
         Laudo laudo = new Laudo(cliente, exames);
         System.out.println(Arrays.toString(this.logger.getHandlers()));
-        this.laudoService.realizarExame();
+        this.laudoService.realizarExame(cpf);
     }
 
 }

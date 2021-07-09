@@ -19,7 +19,10 @@ public class LaudoCortisolServiveImpl implements LaudoService {
 
     // Valores de referência para cortisol plasmático: manhã: 8,7 a 22 ug/dL; tarde: <10 ug/dL
     @Override
-    public Exame realizarExame() {
+    public Exame realizarExame(String cpf) {
+
+        //TODO construir Cliente
+
         ExameCortisol exame = new ExameCortisol();
         if (null == exame.getCliente()) {
             throw new NoClientException("Cliente não cadastrado");

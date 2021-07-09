@@ -20,7 +20,7 @@ public class LaudoGravidezServiceImpl implements LaudoService {
     private LaudoDao laudoDao;
 
     @Override
-    public Exame realizarExame() {
+    public Exame realizarExame(String cpf) {
         ExameGravidez exame = new ExameGravidez();
         if (null == exame.getCliente()) {
             throw new NoClientException("Cliente não cadastrado");

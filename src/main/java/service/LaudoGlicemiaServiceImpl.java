@@ -22,9 +22,10 @@ public class LaudoGlicemiaServiceImpl implements LaudoService {
      *  normal: valor < 99 mg/dL
      *  alterada: 100 mg/dL < valor < 125 mg/dL
      *  diabetes: 126 mg/dL <= valor
+     * @param cpf
      */
     @Override
-    public Exame realizarExame() {
+    public Exame realizarExame(String cpf) {
         ExameGlicemia exame = new ExameGlicemia();
         if (null == exame.getCliente()) {
             throw new NoClientException("Cliente não cadastrado");

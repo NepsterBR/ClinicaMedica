@@ -1,10 +1,9 @@
 package dominio;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Setter
-@Getter
+
+@Data
 public class Cliente {
 
     private String nome;

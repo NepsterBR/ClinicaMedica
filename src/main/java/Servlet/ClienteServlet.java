@@ -35,7 +35,7 @@ public class ClienteServlet extends HttpServlet {
         gson = new Gson();
     }
     @Override
-    @SuppressWarnings("unchecked")
+//    @SuppressWarnings("unchecked")
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         StringBuilder conteudo = getBody(request);
         Cliente clienteRequest = gson.fromJson(conteudo.toString(), Cliente.class);

@@ -22,7 +22,8 @@ public class ClienteServiceImpl implements ClienteService{
     }
 
     @Override
-    public List<Cliente> listAll() throws IOException {
-        return clienteDao.getAll();
+    public List<Cliente> listAll() {
+        return null;
     }
+
 }

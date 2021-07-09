@@ -1,5 +1,6 @@
 package service;
 
+import dao.ClienteDao;
 import dao.LaudoDao;
 import dominio.Exame;
 import dominio.ExameCovid;
@@ -8,7 +9,9 @@ import dominio.ExameEnum;
 import dominio.Laudo;
 import exceptions.NoClientException;
 import jakarta.inject.Inject;
+import jakarta.inject.Qualifier;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Random;
 
@@ -17,28 +20,30 @@ import java.util.Random;
 public class LaudoCovidServiceImpl implements LaudoService {
 
     @Inject
+    private ClienteDao clienteDao;
+
+    @Inject
     private LaudoDao laudoDao;
 
     @Override
-    public Exame realizarExame(String cpf) {
+    public Exame realizarExame(String cpf) throws IOException {
+
         ExameCovid exame = new ExameCovid();
-        if (null == exame.getCliente()) {
-            throw new NoClientException("Cliente não cadastrado");
-        }
+        exame.setCliente(clienteDao.findByCpf(cpf));
+        exame.getCliente().getNome();
+        exame.getCliente().getCpf();
         var random = new Random();
         exame.setNomeExame("Teste de Covid");
         exame.setIdExame("002");
         exame.setParametros("Exame qPCR para a detecção de SARS-CoV-2.");
         exame.setDataRealizacao(LocalDate.now());
         exame.setResultado(random.nextBoolean());
-        System.out.println("Exame de Covid realizado com sucesso.");
+        laudoDao.criar(exame);
         return exame;
     }
 
-    @Override
-    public Laudo emitirLaudo() {
-        ExameCovid exame = new ExameCovid();
-        return laudoDao.getLaudo(exame);
-    }
+
+
+
 
 }

@@ -2,88 +2,46 @@ package dao;
 
 import dominio.Cliente;
 import dominio.Exame;
-import dominio.Laudo;
-import exceptions.NoClientException;
+import dominio.SexoEnum;
+import jakarta.annotation.PostConstruct;
 
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
 public class LaudoDaoImpl implements LaudoDao {
 
-//    final String caminhoDoArquivo = "src\\main\\java\\arquivo\\laudo.txt";
-//    private Path path;
-//
-//    @PostConstruct
-//    public void init() {
-//       this.path = Paths.get(caminhoDoArquivo);
-//    }
+    private Path path;
 
     @Override
-    public Cliente inserirArquivo(Cliente cliente) throws IOException {
-        final String caminhoDoArquivo = "src\\main\\java\\arquivo\\" + cliente.getCpf() + ".txt";
-        Path path = Paths.get(caminhoDoArquivo);
-        try (BufferedWriter bf = Files.newBufferedWriter(path)) {
-            bf.write(format(cliente));
+    public Exame criar(Exame exame) {
+        final var caminhoDoArquivo = "C:\\Users\\55329\\IdeaProjects\\ClinicaMedica\\src\\main\\java\\arquivos\\laudos\\" + exame.getCliente().getCpf() + "_" + exame.getNomeExame() + ".txt";
+        try (var arquivo = new FileWriter(caminhoDoArquivo, false)) {
+            var escreverArquivo = new PrintWriter(arquivo);
+            escreverArquivo.printf("%s;%s;%s;%s;%s;%s;%s\r\n",
+                    exame.getNomeExame(),
+                    exame.getIdExame(),
+                    exame.getParametros(),
+                    exame.getCliente().getNome(),
+                    exame.getCliente().getCpf(),
+                    exame.getCliente().getSexo(),
+                    exame.getDataRealizacao());
+           } catch (Exception ex) {
+            System.out.println("Não foi possivel criar o arquivo");
         }
-        return cliente;
-    }
-
-    @Override
-    public List<Cliente> getAll() throws IOException {
-        final String caminhoDoArquivo = "src\\main\\java\\arquivo\\.txt";
-        Path path = Paths.get(caminhoDoArquivo);
-        List<Cliente> clientes;
-        try (BufferedReader br = Files.newBufferedReader(path)) {
-            clientes = br.lines().map(this::convert).collect(Collectors.toList());
-            // List<String> identificadores = clientes.stream().map(Cliente::getIdentificador).collect(Collectors.toList());
-        }
-        return clientes;
-    }
-
-    @Override
-    public Optional<Cliente> findByCpf(String cpf) throws IOException {
-        List<Cliente> clientes = getAll();
-        return clientes.stream().filter(cliente -> cliente.getCpf().equals(cpf)).findFirst();
+        return exame;
 
     }
 
-    @Override
-    public Laudo getLaudo(Exame exame) {
-            Cliente cliente = new Cliente();
-            if (null == exame.getCliente()) {
-                throw new NoClientException("Cliente não cadastrado.");
-            } else {
-                if (cliente.equals(exame.getCliente())) {
-                    ArrayList<Exame> exames = new ArrayList<Exame>();
-                    Laudo laudo = new Laudo(cliente, exames);
-                    exames.add(exame);
-                    System.out.println("Exame adicinado ao laudo com sucesso");
-                    return laudo;
-                }
-                throw new NoClientException("Cliente não encontrado.");
-            }
+
+
     }
 
-    private String format(Cliente cliente) {
-        return String.format("%s;%s;%s \r\n", cliente.getCpf(), cliente.getNome());
-    }
-
-    private Cliente convert(String linha) {
-        StringTokenizer token = new StringTokenizer(linha, ";");
-        Cliente cliente = new Cliente();
-        cliente.setCpf(token.nextToken());
-        cliente.setNome(token.nextToken());
-        return cliente;
-    }
-
-}

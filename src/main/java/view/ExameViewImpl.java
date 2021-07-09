@@ -1,9 +1,8 @@
 package view;
 
 import dominio.Exame;
-import jakarta.inject.Inject;
 
-public class ExameViewImpl implements ExameView{
+public class ExameViewImpl implements ExameService {
 
 
     @Override

@@ -4,11 +4,7 @@ import dominio.Cliente;
 import dominio.SexoEnum;
 import jakarta.annotation.PostConstruct;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -62,46 +58,6 @@ public class ClienteDaoImpl implements ClienteDao {
         }
     }
 
-    @Override
-    public List<Cliente> getAll() throws IOException {
-        List<Cliente> clientes;
-        try (BufferedReader br = Files.newBufferedReader(path)) {
-            clientes = br.lines().filter(s -> s.isEmpty()).map(this::convert).collect(Collectors.toList());
-        }
-        return clientes;
-    }
-
-    @Override
-    public Optional<Cliente> findByCpf(String cpf) throws IOException {
-        List<Cliente> clientes = getAll();
-        return clientes.stream().filter(cliente -> cliente.getCpf().equals(cpf)).findFirst();
-
-    }
-
-    @Override
-    public Cliente alterarArquivo(Cliente cliente, String identificador) throws IOException {
-        //procurar o cliente pelo identificador
-        List<Cliente> clientes = getAll();
-        Optional<Cliente> optionalCliente = clientes.stream()
-                .filter(clienteSearch -> clienteSearch.getCpf().equals(identificador)).findFirst();
-        if (optionalCliente.isPresent()) {
-            //alterar este cliente com os dados do objeto
-            //pegar todos os registros
-            optionalCliente.get().setNome(cliente.getNome());
-
-            StringBuilder builder = new StringBuilder();
-            for (Cliente clienteBuilder : clientes) {
-                builder.append(format(clienteBuilder));
-            }
-
-            //reescrever all file
-            write(builder.toString(), StandardOpenOption.CREATE_NEW);
-
-        }
-
-        return cliente;
-    }
-
     private String format(Cliente cliente) {
         return String.format("%s%n%s%n%s", cliente.getCpf(), cliente.getNome(), cliente.getSexo());
     }
@@ -120,4 +76,28 @@ public class ClienteDaoImpl implements ClienteDao {
         }
         return cliente;
     }
+
+    @Override
+    public Cliente findByCpf(String cpf) throws IOException {
+        Cliente cliente = new Cliente();
+        cliente.setCpf(cpf);
+        final var caminhoDoArquivo = "C:\\Users\\55329\\IdeaProjects\\ClinicaMedica\\src\\main\\java\\arquivos\\usuarios\\" + cliente.getCpf()+".txt";
+        try (var lerArquivo = new BufferedReader(new FileReader(caminhoDoArquivo))){
+            cliente.setNome(lerArquivo.readLine());
+            cliente.setCpf(lerArquivo.readLine());
+            String sexoTemp = lerArquivo.readLine();
+            if(sexoTemp.equalsIgnoreCase("feminino")){
+                cliente.setSexo(SexoEnum.FEMININO);
+            } else {
+                cliente.setSexo(SexoEnum.MASCULINO);
+            }
+        } catch (Exception ex) {
+            System.out.println("Cliente não encontrado findByCpf");
+        }
+
+        return cliente;
+
+    }
+
+
 }

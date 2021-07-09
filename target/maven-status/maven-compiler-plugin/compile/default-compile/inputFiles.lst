@@ -5,7 +5,6 @@ C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\dominio\ExameEnum.java
 C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\Servlet\ClienteRealizarExameView.java
 C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\service\ClienteService.java
 C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\service\LaudoGlicemiaServiceImpl.java
-C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\factory\ExameViewAnnotationLiteral.java
 C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\dao\ClienteDao.java
 C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\service\ClienteServiceImpl.java
 C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\service\ExameService.java
@@ -13,6 +12,7 @@ C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\service\LaudoGravidezSer
 C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\dominio\ExameCovid.java
 C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\view\ExameViewImpl.java
 C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\service\LaudoCortisolServiveImpl.java
+C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\view\ExameService.java
 C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\dominio\Exame.java
 C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\service\LaudoCovidServiceImpl.java
 C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\dao\ExameDaoImpl.java
@@ -28,10 +28,10 @@ C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\dominio\Cliente.java
 C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\dominio\ExameGlicemia.java
 C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\dominio\ExameGravidez.java
 C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\dominio\ExameCortisol.java
-C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\factory\ExameViewFactory.java
+C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\factory\LaudoServiceAnnotationLiteral.java
+C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\factory\LaudoServiceFactory.java
 C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\service\ExameServiceImpl.java
 C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\view\ClienteView.java
 C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\dao\LaudoDao.java
-C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\view\ExameView.java
 C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\exceptions\WrongSexException.java
 C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\Servlet\ExameServlet.java

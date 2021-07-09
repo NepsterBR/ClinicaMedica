@@ -3,7 +3,6 @@ package Servlet;
 import com.google.gson.Gson;
 import dominio.*;
 import exceptions.NoClientException;
-import factory.ExameViewFactory;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,16 +10,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import service.ClienteService;
 import service.ExameService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 @WebServlet(name = "exameServlet" , urlPatterns = "/exame")
 public class ExameServlet extends HttpServlet {
@@ -77,9 +71,13 @@ public class ExameServlet extends HttpServlet {
         PrintWriter print = prepareResponse(response);
         String resposta = "";
         if (null == exame || null == cpf) {
-            CustomMessage message = new CustomMessage(HttpServletResponse.SC_BAD_REQUEST, "Invalid Parameters");
-            response.setStatus(message.getStatus());
-            resposta = gson.toJson(message);
+            //CustomMessage message = new CustomMessage(HttpServletResponse.SC_BAD_REQUEST, "Invalid Parameters");
+//            response.setStatus(message.getStatus());
+//            resposta = gson.toJson(message);
+
+            response.setStatus(404);
+            resposta = gson.toJson("testeExame ");
+
         } else {
             try {
                 HttpSession sessao = request.getSession(true);
@@ -87,7 +85,8 @@ public class ExameServlet extends HttpServlet {
                 resposta = gson.toJson(exameRequest);
             } catch (NoClientException noClientException) {
                 response.setStatus(400);
-                resposta = gson.toJson(new CustomMessage(400, noClientException.getMessage()));
+                //resposta = gson.toJson(new CustomMessage(400, noClientException.getMessage()));
+                resposta = gson.toJson("teste exame Exame");
             }
         }
         print.write(resposta);

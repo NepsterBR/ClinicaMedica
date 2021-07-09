@@ -1,18 +1,20 @@
 package service;
 
+import dao.ClienteDao;
 import dao.LaudoDao;
-import dominio.Exame;
-import dominio.ExameEnum;
-import dominio.ExameGlicemia;
-import dominio.Laudo;
+import dominio.*;
 import exceptions.NoClientException;
 import jakarta.inject.Inject;
 
+import java.io.IOException;
 import java.util.Random;
 
 
 @TipoExame(value = ExameEnum.GLICEMIA)
 public class LaudoGlicemiaServiceImpl implements LaudoService {
+
+    @Inject
+    private ClienteDao clienteDao;
 
     @Inject
     private LaudoDao laudoDao;
@@ -25,25 +27,17 @@ public class LaudoGlicemiaServiceImpl implements LaudoService {
      * @param cpf
      */
     @Override
-    public Exame realizarExame(String cpf) {
+    public Exame realizarExame(String cpf) throws IOException {
+
         ExameGlicemia exame = new ExameGlicemia();
-        if (null == exame.getCliente()) {
-            throw new NoClientException("Cliente não cadastrado");
-        } else {
-            var random = new Random();
+        exame.setCliente(clienteDao.findByCpf(cpf));
+        var random = new Random();
             exame.setNomeExame("Exame de Glicemia");
             exame.setIdExame("003");
             exame.setParametros("Exame de sangue para a medição de glicose.");
             exame.setResultado(random.nextFloat() * getRandomNumber(100, 600));
             return exame;
         }
-    }
-
-    @Override
-    public Laudo emitirLaudo() {
-        ExameGlicemia exame = new ExameGlicemia();
-        return laudoDao.getLaudo(exame);
-    }
 
     public int getRandomNumber(int min, int max) {
         return (int) (Math.random() * (max - min)) + min;

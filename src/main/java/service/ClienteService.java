@@ -8,5 +8,5 @@ import java.util.List;
 public interface ClienteService {
     Cliente inserir(Cliente cliente) throws IOException;
 
-    List<Cliente> listAll() throws IOException;
+    List<Cliente> listAll();
 }

@@ -35,7 +35,7 @@ public class ClienteServlet extends HttpServlet {
         gson = new Gson();
     }
     @Override
-//    @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         StringBuilder conteudo = getBody(request);
         Cliente clienteRequest = gson.fromJson(conteudo.toString(), Cliente.class);
@@ -61,30 +61,6 @@ public class ClienteServlet extends HttpServlet {
         print.write(resposta);
         print.close();
 
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        final String cpfPesquisa = request.getParameter("cpf");
-        HttpSession sessao = request.getSession();
-        List<Cliente> clientes = new ArrayList<>();
-        if (Objects.nonNull((sessao.getAttribute(CLIENTES_SESSION)))) {
-            clientes.addAll((List<Cliente>) sessao.getAttribute(CLIENTES_SESSION));
-        }
-        PrintWriter printWriter = prepareResponse(response);
-        if (null != cpfPesquisa && Objects.nonNull(clientes)) {
-            Optional<Cliente> optionalCliente = clientes.stream().filter(cliente -> cliente.getCpf().equals(cpfPesquisa)).findFirst();
-            if (optionalCliente.isPresent()) {
-                printWriter.write(gson.toJson(optionalCliente.get()));
-            } else {
-                CustomMessage message = new CustomMessage(404, "Conteúdo não encontrado");
-                response.setStatus(404);
-                printWriter.write(gson.toJson(message));
-            }
-        } else {
-            printWriter.write(gson.toJson(clientes));
-        }
-        printWriter.close();
     }
 
     private PrintWriter prepareResponse(HttpServletResponse response) throws IOException {

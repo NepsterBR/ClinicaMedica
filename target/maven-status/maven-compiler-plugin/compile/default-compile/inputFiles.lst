@@ -1,6 +1,7 @@
 C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\view\ClienteViewImpl.java
 C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\dominio\Cliente.java
 C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\dao\ClienteDaoImpl.java
+C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\dao\ExameDaoImpl.java
 C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\dominio\CustomMessage.java
 C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\view\ClienteView.java
 C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\dao\LaudoDaoImpl.java
@@ -14,12 +15,15 @@ C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\dao\LaudoDao.java
 C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\dominio\Laudo.java
 C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\factory\ExameViewFactory.java
 C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\view\ExameViewImpl.java
+C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\Servlet\ExameServlet.java
 C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\dominio\Exame.java
 C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\service\LaudoGlicemiaServiceImpl.java
 C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\dominio\ExameEnum.java
 C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\dao\ClienteDao.java
 C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\dominio\ExameCovid.java
+C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\service\ExameServiceImpl.java
 C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\service\ClienteServiceImpl.java
+C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\dao\ExameDao.java
 C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\factory\ExameViewAnnotationLiteral.java
 C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\service\ExameService.java
 C:\Users\gabri\IdeaProjects\clinica-medica\src\main\java\service\LaudoCovidServiceImpl.java

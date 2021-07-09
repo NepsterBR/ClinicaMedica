@@ -1,6 +1,7 @@
 dominio\ExameEnum.class
 service\ClienteService.class
 exceptions\NoClientException.class
+dao\ExameDao.class
 dominio\CustomMessage.class
 service\LaudoCovidServiceImpl.class
 dominio\Laudo.class
@@ -14,11 +15,13 @@ dao\ClienteDaoImpl.class
 dominio\SexoEnum.class
 dao\LaudoDao.class
 factory\ExameViewAnnotationLiteral.class
+dao\ExameDaoImpl.class
 dominio\ExameCortisol.class
 service\LaudoGlicemiaServiceImpl.class
 dominio\ExameGlicemia.class
 dominio\ExameGravidez.class
 view\ClienteViewImpl.class
+service\ExameServiceImpl.class
 dao\LaudoDaoImpl.class
 view\ClienteView.class
 service\LaudoCortisolServiveImpl.class
@@ -28,6 +31,7 @@ dominio\Cliente.class
 factory\ExameViewFactory.class
 dominio\Exame.class
 service\ExameService.class
+Servlet\ExameServlet.class
 service\LaudoGravidezServiceImpl.class
 dominio\ExameCovid.class
 Servlet\ClienteRealizarExameView.class

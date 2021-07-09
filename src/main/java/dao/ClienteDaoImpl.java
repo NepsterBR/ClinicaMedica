@@ -26,7 +26,7 @@ public class ClienteDaoImpl implements ClienteDao {
 
     @Override
     public Cliente criar(Cliente cliente) {
-        final var caminhoDoArquivo = "C:\\Users\\gabri\\IdeaProjects\\clinica-medica\\src\\main\\java\\arquivos\\"+ cliente.getCpf()+".txt";
+        final var caminhoDoArquivo = "C:\\Users\\gabri\\IdeaProjects\\clinica-medica\\src\\main\\java\\arquivos\\usuarios\\"+ cliente.getCpf()+".txt";
         try (var arquivo = new FileWriter(caminhoDoArquivo, false)) {
             var escreverArquivo = new PrintWriter(arquivo);
             escreverArquivo.printf("%s%n%s%n%s", cliente.getNome(), cliente.getCpf(), cliente.getSexo());
@@ -39,7 +39,7 @@ public class ClienteDaoImpl implements ClienteDao {
 
     public void init(Cliente cliente) {
         try {
-            String caminho = "C:\\Users\\gabri\\IdeaProjects\\clinica-medica\\src\\main\\java\\arquivos\\"+ cliente.getCpf()+".txt";
+            String caminho = "C:\\Users\\gabri\\IdeaProjects\\clinica-medica\\src\\main\\java\\arquivos\\usuarios\\"+ cliente.getCpf()+".txt";
             path = Paths.get(caminho);
             if (path.toFile().exists()) {
                 Files.createFile(path);
@@ -103,11 +103,11 @@ public class ClienteDaoImpl implements ClienteDao {
     }
 
     private String format(Cliente cliente) {
-        return String.format("%s;%s;%s \r\n", cliente.getCpf(), cliente.getNome(), cliente.getSexo());
+        return String.format("%s%n%s%n%s", cliente.getCpf(), cliente.getNome(), cliente.getSexo());
     }
 
     private Cliente convert(String linha) {
-        StringTokenizer token = new StringTokenizer(linha, ";");
+        StringTokenizer token = new StringTokenizer(linha, "\n");
         Cliente cliente = new Cliente();
         cliente.setCpf(token.nextToken());
         cliente.setNome(token.nextToken());

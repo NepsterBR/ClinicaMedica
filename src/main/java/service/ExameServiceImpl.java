@@ -10,8 +10,14 @@ public class ExameServiceImpl implements ExameService {
     @Inject
     private ExameDao exameDao;
 
+    @Inject
+    private LaudoService laudoService;
+
     @Override
-    public void inserir(Exame exameRequest, String cpf) {
+    public void inserir(Exame exameRequest, String cpf)
+    {
+        //TODO chamar o metodo realizarExame
+        laudoService.realizarExame();
         exameDao.criar(exameRequest,cpf);
     }
 }

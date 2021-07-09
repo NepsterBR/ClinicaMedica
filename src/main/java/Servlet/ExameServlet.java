@@ -1,10 +1,7 @@
 package Servlet;
 
 import com.google.gson.Gson;
-import dominio.Cliente;
-import dominio.CustomMessage;
-import dominio.Exame;
-import dominio.ExameCovid;
+import dominio.*;
 import exceptions.NoClientException;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
@@ -43,10 +40,37 @@ public class ExameServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         StringBuilder conteudo = getBody(request);
         String cpf = request.getParameter("cpf");
-        ExameCovid exameRequest = gson.fromJson(conteudo.toString(), ExameCovid.class);
+        String exame = request.getParameter("exame");
+        Exame exameRequest;
+        switch (exame) {
+            case "COVID" :
+                exameRequest = gson.fromJson(conteudo.toString(), ExameCovid.class);
+                printResponse(request, response, cpf, exame, exameRequest);
+                break;
+            case "GRAVIDEZ" :
+                exameRequest = gson.fromJson(conteudo.toString(), ExameGravidez.class);
+                printResponse(request, response, cpf, exame, exameRequest);
+                break;
+            case "CORTISOL" :
+                exameRequest = gson.fromJson(conteudo.toString(), ExameCortisol.class);
+                printResponse(request, response, cpf, exame, exameRequest);
+                break;
+           case "GLICEMIA" :
+                exameRequest = gson.fromJson(conteudo.toString(), ExameGlicemia.class);
+                printResponse(request, response, cpf, exame, exameRequest);
+                break;
+            default:
+                System.exit(0);
+
+        }
+
+
+    }
+
+    private void printResponse(HttpServletRequest request, HttpServletResponse response, String cpf, String exame, Exame exameRequest) throws IOException {
         PrintWriter print = prepareResponse(response);
         String resposta = "";
-        if (null == exameRequest.getNomeExame() || null == cpf) {
+        if (null == exame || null == cpf) {
             CustomMessage message = new CustomMessage(HttpServletResponse.SC_BAD_REQUEST, "Invalid Parameters");
             response.setStatus(message.getStatus());
             resposta = gson.toJson(message);
@@ -62,7 +86,6 @@ public class ExameServlet extends HttpServlet {
         }
         print.write(resposta);
         print.close();
-
     }
 
     private PrintWriter prepareResponse(HttpServletResponse response) throws IOException {

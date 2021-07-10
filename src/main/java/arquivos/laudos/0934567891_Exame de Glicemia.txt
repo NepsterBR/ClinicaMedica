@@ -1,0 +1,2 @@
+Exame de Glicemia;003;Exame de sangue para a medição de glicose.;Arnon;0934567891;MASCULINO;2021-07-10;176.10667
+Exame de Glicemia;003;Exame de sangue para a medição de glicose.;Arnon;0934567891;MASCULINO;2021-07-10;54.543446

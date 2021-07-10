@@ -1,3 +1,4 @@
-Exame de Glicemia;003;Exame de sangue para a mediÁ„o de glicose.;DesirÈe;3234567891;FEMININO;2021-07-09;106.69105
-Exame de Glicemia;003;Exame de sangue para a mediÁ„o de glicose.;DesirÈe;3234567891;FEMININO;2021-07-09;109.04246
-Exame de Glicemia;003;Exame de sangue para a mediÁ„o de glicose.;DesirÈe;3234567891;FEMININO;2021-07-09;56.123203
+Exame de Glicemia;003;Exame de sangue para a medi√ß√£o de glicose.;Desir√©e;3234567891;FEMININO;2021-07-09;106.69105
+Exame de Glicemia;003;Exame de sangue para a medi√ß√£o de glicose.;Desir√©e;3234567891;FEMININO;2021-07-09;109.04246
+Exame de Glicemia;003;Exame de sangue para a medi√ß√£o de glicose.;Desir√©e;3234567891;FEMININO;2021-07-09;56.123203
+Exame de Glicemia;003;Exame de sangue para a medi√ß√£o de glicose.;Desir√©e;3234567891;FEMININO;2021-07-09;27.228544

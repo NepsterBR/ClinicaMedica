@@ -2,6 +2,7 @@ package dao;
 
 import dominio.Cliente;
 import dominio.Exame;
+import dominio.Laudo;
 import dominio.SexoEnum;
 import jakarta.annotation.PostConstruct;
 
@@ -10,11 +11,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
-import java.util.StringTokenizer;
+import java.time.LocalDate;
+import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class LaudoDaoImpl implements LaudoDao {
@@ -43,7 +42,47 @@ public class LaudoDaoImpl implements LaudoDao {
 
     }
 
+    @Override
+    public Laudo lerLaudo(Exame exame) throws IOException {
+
+        final var caminhoDoArquivo = "C:\\Users\\55329\\IdeaProjects\\ClinicaMedica\\src\\main\\java\\arquivos\\laudos\\" + exame.getCliente().getCpf() + "_" + exame.getNomeExame() + ".txt";
+        Path caminhoArquivo = Paths.get(caminhoDoArquivo);
+        ArrayList<Exame> exames = new ArrayList<Exame>();
+        try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo.toFile()))) {
+
+            String linha;
+
+            while ((linha = br.readLine()) != null) {
+                Exame exame1 = new Exame();
+                StringTokenizer token = new StringTokenizer(linha, ";");
+                exame1.setNomeExame(token.nextToken());
+                exame1.setIdExame(token.nextToken());
+                exame1.setParametros(token.nextToken());
+                Cliente cliente = new Cliente();
+                cliente.setNome(token.nextToken());
+                cliente.setCpf(token.nextToken());
+                String sexoTemp = token.nextToken();
+                if (sexoTemp.equalsIgnoreCase("feminino")) {
+                    cliente.setSexo(SexoEnum.FEMININO);
+                } else {
+                    cliente.setSexo(SexoEnum.MASCULINO);
+                }
+                exame1.setCliente(cliente);
+                exame1.setDataRealizacao(LocalDate.parse(token.nextToken()));
+                exame1.setResultado(token.nextToken());
+
+                exames.add(exame1);
+
+            }
+            Laudo laudo = new Laudo();
+            laudo.setExames(exames);
+
+            return laudo;
+        }
 
 
     }
+
+
+}
 

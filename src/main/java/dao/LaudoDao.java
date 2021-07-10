@@ -12,4 +12,5 @@ public interface LaudoDao {
 
     public Exame criar(Exame exame);
 
+    Laudo lerLaudo(Exame exame) throws IOException;
 }

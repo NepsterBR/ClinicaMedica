@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-public abstract class Exame {
+public class Exame {
 
     private String nomeExame;
     private String idExame;

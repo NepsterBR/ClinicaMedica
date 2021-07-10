@@ -16,6 +16,7 @@ dao\ClienteDaoImpl.class
 dominio\SexoEnum.class
 dao\LaudoDao.class
 dao\ExameDaoImpl.class
+dominio\SolicitaExame.class
 dominio\ExameCortisol.class
 service\LaudoGlicemiaServiceImpl.class
 dominio\ExameGlicemia.class

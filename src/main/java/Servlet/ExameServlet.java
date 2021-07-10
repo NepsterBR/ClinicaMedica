@@ -1,6 +1,7 @@
 package Servlet;
 
 import com.google.gson.Gson;
+import dao.LaudoDao;
 import dominio.*;
 import exceptions.NoClientException;
 import jakarta.inject.Inject;
@@ -23,7 +24,12 @@ public class ExameServlet extends HttpServlet {
 
     @Inject
     private ExameService exameService;
+
     private Gson gson;
+
+    @Inject
+    private LaudoDao laudoDao;
+
 
     @Override
     public void init() throws ServletException {
@@ -34,30 +40,31 @@ public class ExameServlet extends HttpServlet {
     @SuppressWarnings("unchecked")
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         StringBuilder conteudo = getBody(request);
-        String cpf = request.getParameter("cpf");
-        String exame = request.getParameter("exame");
+
+        SolicitaExame solicitacao = gson.fromJson(conteudo.toString(), SolicitaExame.class);
+
         Exame exameRequest;
         ExameEnum exameEnum = null;
-        switch (exame) {
+        switch (solicitacao.getNomeExame()) {
             case "COVID" :
                 exameRequest = gson.fromJson(conteudo.toString(), ExameCovid.class);
                 exameEnum = ExameEnum.COVID;
-                printResponse(request, response, cpf, exame, exameRequest, exameEnum);
+                printResponse(request, response, solicitacao.getCpf(), solicitacao.getNomeExame(), exameRequest, exameEnum);
                 break;
             case "GRAVIDEZ" :
                 exameEnum = ExameEnum.GRAVIDEZ;
                 exameRequest = gson.fromJson(conteudo.toString(), ExameGravidez.class);
-                printResponse(request, response, cpf, exame, exameRequest, exameEnum);
+                printResponse(request, response, solicitacao.getCpf(), solicitacao.getNomeExame(), exameRequest, exameEnum);
                 break;
             case "CORTISOL" :
                 exameEnum = ExameEnum.CORTISOL;
                 exameRequest = gson.fromJson(conteudo.toString(), ExameCortisol.class);
-                printResponse(request, response, cpf, exame, exameRequest, exameEnum);
+                printResponse(request, response, solicitacao.getCpf(), solicitacao.getNomeExame(), exameRequest, exameEnum);
                 break;
            case "GLICEMIA" :
                 exameEnum = ExameEnum.GLICEMIA;
                 exameRequest = gson.fromJson(conteudo.toString(), ExameGlicemia.class);
-                printResponse(request, response, cpf, exame, exameRequest, exameEnum);
+                printResponse(request, response, solicitacao.getCpf(), solicitacao.getNomeExame(), exameRequest, exameEnum);
                 break;
             default:
                 System.exit(0);
@@ -71,12 +78,9 @@ public class ExameServlet extends HttpServlet {
         PrintWriter print = prepareResponse(response);
         String resposta = "";
         if (null == exame || null == cpf) {
-            //CustomMessage message = new CustomMessage(HttpServletResponse.SC_BAD_REQUEST, "Invalid Parameters");
-//            response.setStatus(message.getStatus());
-//            resposta = gson.toJson(message);
-
-            response.setStatus(404);
-            resposta = gson.toJson("testeExame ");
+            CustomMessage message = new CustomMessage(HttpServletResponse.SC_BAD_REQUEST, "Invalid Parameters");
+            response.setStatus(message.getStatus());
+            resposta = gson.toJson(message);
 
         } else {
             try {
@@ -85,8 +89,8 @@ public class ExameServlet extends HttpServlet {
                 resposta = gson.toJson(exameRequest);
             } catch (NoClientException noClientException) {
                 response.setStatus(400);
-                //resposta = gson.toJson(new CustomMessage(400, noClientException.getMessage()));
-                resposta = gson.toJson("teste exame Exame");
+                resposta = gson.toJson(new CustomMessage(400, noClientException.getMessage()));
+
             }
         }
         print.write(resposta);
@@ -111,30 +115,46 @@ public class ExameServlet extends HttpServlet {
     }
 
 
-//    @Override
-//    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        final String cpf = request.getParameter("cpf");
-//        final String exame = request.getParameter("exame");
-//        List<Cliente> clientes = new ArrayList<>();
-//        if (Objects.nonNull((sessao.getAttribute(CLIENTES_SESSION)))) {
-//            clientes.addAll((List<Cliente>) sessao.getAttribute(CLIENTES_SESSION));
-//        }
-//        PrintWriter printWriter = prepareResponse(response);
-//        if (null != cpfPesquisa && Objects.nonNull(clientes)) {
-//            Optional<Cliente> optionalCliente = clientes.stream().filter(cliente -> cliente.getCpf().equals(cpfPesquisa)).findFirst();
-//            if (optionalCliente.isPresent()) {
-//                printWriter.write(gson.toJson(optionalCliente.get()));
-//            } else {
-//                CustomMessage message = new CustomMessage(404, "Conteúdo não encontrado");
-//                response.setStatus(404);
-//                printWriter.write(gson.toJson(message));
-//            }
-//        } else {
-//            printWriter.write(gson.toJson(clientes));
-//        }
-//        printWriter.close();
-//    }
-//
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        final String cpf = request.getParameter("cpf");
+        final String exame = request.getParameter("exame");
+
+        PrintWriter printWriter = prepareResponse(response);
+        if (null != cpf && null != exame) {
+            Exame pesquisaExame = new Exame();
+            Cliente cliente = new Cliente();
+            cliente.setCpf(cpf);
+            pesquisaExame.setCliente(cliente);
+
+            switch (exame) {
+                case "COVID" :
+                    pesquisaExame.setNomeExame("Teste de Covid");
+                    break;
+                case "GLICEMIA" :
+                    pesquisaExame.setNomeExame("Exame de Glicemia");
+                    break;
+                case "CORTISOL" :
+                    pesquisaExame.setNomeExame("Exame de Cortisol");
+                    break;
+                case "GRAVIDEZ" :
+                    pesquisaExame.setNomeExame("Teste de Gravidez");
+                    break;
+                default:
+                    System.exit(0);
+            }
+
+               printWriter.write(gson.toJson(laudoDao.lerLaudo(pesquisaExame)));
+
+            } else {
+                CustomMessage message = new CustomMessage(404, "Conteúdo não encontrado");
+                response.setStatus(404);
+                printWriter.write(gson.toJson(message));
+            }
+
+        printWriter.close();
+    }
+
 
 
 

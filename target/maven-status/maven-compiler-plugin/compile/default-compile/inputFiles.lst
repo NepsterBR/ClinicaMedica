@@ -31,6 +31,7 @@ C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\dominio\ExameCortisol.ja
 C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\factory\LaudoServiceAnnotationLiteral.java
 C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\factory\LaudoServiceFactory.java
 C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\service\ExameServiceImpl.java
+C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\dominio\SolicitaExame.java
 C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\view\ClienteView.java
 C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\dao\LaudoDao.java
 C:\Users\55329\IdeaProjects\ClinicaMedica\src\main\java\exceptions\WrongSexException.java

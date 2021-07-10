@@ -1,1 +1,0 @@
-Teste de Covid;002;Exame qPCR para a detecção de SARS-CoV-2.;Gabriel;3234567890;MASCULINO;2021-07-09

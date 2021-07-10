@@ -1,0 +1,4 @@
+Exame de Cortisol;004;Exame de sangue para a medição dos níveis de cortisol.;Desirée;3234567891;FEMININO;2021-07-09;16.672022
+Exame de Cortisol;004;Exame de sangue para a medição dos níveis de cortisol.;Desirée;3234567891;FEMININO;2021-07-09;14.3583355
+Exame de Cortisol;004;Exame de sangue para a medição dos níveis de cortisol.;Desirée;3234567891;FEMININO;2021-07-09;19.29228
+Exame de Cortisol;004;Exame de sangue para a medição dos níveis de cortisol.;Desirée;3234567891;FEMININO;2021-07-09;18.740345

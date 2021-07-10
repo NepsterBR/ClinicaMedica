@@ -8,7 +8,6 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-
 public abstract class Exame {
 
     private String nomeExame;
@@ -16,5 +15,6 @@ public abstract class Exame {
     private String parametros;
     private Cliente cliente;
     private LocalDate dataRealizacao;
+    private String resultado;
 
 }

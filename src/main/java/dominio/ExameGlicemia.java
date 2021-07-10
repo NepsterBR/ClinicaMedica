@@ -7,6 +7,6 @@ import lombok.Setter;
 @Setter
 public class ExameGlicemia extends Exame {
 
-    private float resultado;
+   // private float resultado;
 
 }

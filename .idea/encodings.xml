@@ -3,5 +3,12 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/arquivos/laudos/3234567890_Teste de Covid.txt" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/arquivos/laudos/3234567891_Exame de Cortisol.txt" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/arquivos/laudos/3234567891_Exame de Glicemia.txt" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/arquivos/laudos/3234567891_Teste de Covid.txt" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/arquivos/laudos/3234567891_Teste de GRAVIDEZ.txt" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/arquivos/laudos/3234567891_null.txt" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/arquivos/usuarios/3234567891.txt" charset="windows-1252" />
+    <file url="PROJECT" charset="windows-1252" />
   </component>
 </project>

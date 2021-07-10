@@ -8,6 +8,7 @@ import exceptions.NoClientException;
 import jakarta.inject.Inject;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Random;
 
 @TipoExame(value = ExameEnum.CORTISOL)
@@ -29,7 +30,8 @@ public class LaudoCortisolServiveImpl implements LaudoService {
         exame.setNomeExame("Exame de Cortisol");
         exame.setIdExame("004");
         exame.setParametros("Exame de sangue para a medição dos níveis de cortisol.");
-        exame.setResultado(random.nextFloat() * getRandomNumber(1, 30));
+        exame.setDataRealizacao(LocalDate.now());
+        exame.setResultado(String.valueOf(random.nextFloat() * getRandomNumber(1, 30)));
         laudoDao.criar(exame);
         return exame;
     }

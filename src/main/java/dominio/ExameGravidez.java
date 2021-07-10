@@ -7,6 +7,6 @@ import lombok.Setter;
 @Setter
 public class ExameGravidez extends Exame {
 
-    private boolean resultado;
+    //private boolean resultado;
 
 }

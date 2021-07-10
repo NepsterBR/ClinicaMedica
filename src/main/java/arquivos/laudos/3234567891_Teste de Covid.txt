@@ -1,0 +1,3 @@
+Teste de Covid;002;Exame qPCR para a detecção de SARS-CoV-2.;Desirée;3234567891;FEMININO;2021-07-09;true
+Teste de Covid;002;Exame qPCR para a detecção de SARS-CoV-2.;Desirée;3234567891;FEMININO;2021-07-09;true
+Teste de Covid;002;Exame qPCR para a detecção de SARS-CoV-2.;Desirée;3234567891;FEMININO;2021-07-09;false

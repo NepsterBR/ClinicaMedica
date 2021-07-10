@@ -9,6 +9,6 @@ import java.time.LocalDate;
 @Setter
 public class ExameCortisol extends Exame {
 
-    private float resultado;
+   // private float resultado;
 
 }

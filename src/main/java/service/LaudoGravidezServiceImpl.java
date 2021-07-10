@@ -11,6 +11,7 @@ import exceptions.WrongSexException;
 import jakarta.inject.Inject;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Random;
 
 @TipoExame(value = ExameEnum.GRAVIDEZ)
@@ -30,7 +31,11 @@ public class LaudoGravidezServiceImpl implements LaudoService {
                throw new WrongSexException ("O cliente não pode realizar o exame indicado.");
             }
             var random = new Random();
-            exame.setResultado(random.nextBoolean());
+            exame.setNomeExame("Teste de Gravidez");
+            exame.setIdExame("001");
+            exame.setParametros("Teste para detecção de níveis de BHCG");
+            exame.setDataRealizacao(LocalDate.now());
+            exame.setResultado(String.valueOf(random.nextBoolean()));
             laudoDao.criar(exame);
             return exame;
     }

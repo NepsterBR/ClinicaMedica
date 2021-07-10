@@ -109,4 +109,34 @@ public class ExameServlet extends HttpServlet {
         }
         return conteudo;
     }
+
+
+//    @Override
+//    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        final String cpf = request.getParameter("cpf");
+//        final String exame = request.getParameter("exame");
+//        List<Cliente> clientes = new ArrayList<>();
+//        if (Objects.nonNull((sessao.getAttribute(CLIENTES_SESSION)))) {
+//            clientes.addAll((List<Cliente>) sessao.getAttribute(CLIENTES_SESSION));
+//        }
+//        PrintWriter printWriter = prepareResponse(response);
+//        if (null != cpfPesquisa && Objects.nonNull(clientes)) {
+//            Optional<Cliente> optionalCliente = clientes.stream().filter(cliente -> cliente.getCpf().equals(cpfPesquisa)).findFirst();
+//            if (optionalCliente.isPresent()) {
+//                printWriter.write(gson.toJson(optionalCliente.get()));
+//            } else {
+//                CustomMessage message = new CustomMessage(404, "Conteúdo não encontrado");
+//                response.setStatus(404);
+//                printWriter.write(gson.toJson(message));
+//            }
+//        } else {
+//            printWriter.write(gson.toJson(clientes));
+//        }
+//        printWriter.close();
+//    }
+//
+
+
+
+
 }

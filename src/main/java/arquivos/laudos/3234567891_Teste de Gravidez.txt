@@ -1,0 +1,3 @@
+Teste de Gravidez;001;Teste para detecção de níveis de BHCG;Desirée;3234567891;FEMININO;2021-07-09;true
+Teste de Gravidez;001;Teste para detecção de níveis de BHCG;Desirée;3234567891;FEMININO;2021-07-09;false
+Teste de Gravidez;001;Teste para detecção de níveis de BHCG;Desirée;3234567891;FEMININO;2021-07-09;true

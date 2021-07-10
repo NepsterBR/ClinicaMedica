@@ -30,14 +30,12 @@ public class LaudoCovidServiceImpl implements LaudoService {
 
         ExameCovid exame = new ExameCovid();
         exame.setCliente(clienteDao.findByCpf(cpf));
-        exame.getCliente().getNome();
-        exame.getCliente().getCpf();
         var random = new Random();
         exame.setNomeExame("Teste de Covid");
         exame.setIdExame("002");
         exame.setParametros("Exame qPCR para a detecção de SARS-CoV-2.");
         exame.setDataRealizacao(LocalDate.now());
-        exame.setResultado(random.nextBoolean());
+        exame.setResultado(String.valueOf(random.nextBoolean()));
         laudoDao.criar(exame);
         return exame;
     }

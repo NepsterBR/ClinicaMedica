@@ -7,6 +7,7 @@ import exceptions.NoClientException;
 import jakarta.inject.Inject;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Random;
 
 
@@ -35,7 +36,9 @@ public class LaudoGlicemiaServiceImpl implements LaudoService {
             exame.setNomeExame("Exame de Glicemia");
             exame.setIdExame("003");
             exame.setParametros("Exame de sangue para a medição de glicose.");
-            exame.setResultado(random.nextFloat() * getRandomNumber(100, 600));
+            exame.setDataRealizacao(LocalDate.now());
+            exame.setResultado(String.valueOf(random.nextFloat() * getRandomNumber(100, 600)));
+            laudoDao.criar(exame);
             return exame;
         }
 

@@ -2,6 +2,7 @@ package Servlet;
 
 import com.google.gson.Gson;
 import dominio.Cliente;
+import dominio.CustomMessage;
 import exceptions.NoClientException;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
@@ -22,7 +23,7 @@ import java.util.Optional;
 @WebServlet(name = "clienteServlet" , urlPatterns = "/cliente")
 public class ClienteServlet extends HttpServlet {
 
-//    public static final String CLIENTES_SESSION = "clientes";
+    public static final String CLIENTES_SESSION = "clientes";
 
     @Inject
     private ClienteService clienteService;
@@ -41,28 +42,23 @@ public class ClienteServlet extends HttpServlet {
         PrintWriter print = prepareResponse(response);
         String resposta = "";
         if (null == clienteRequest.getNome() || null == clienteRequest.getCpf()) {
-        //    CustomMessage message = new CustomMessage(HttpServletResponse.SC_BAD_REQUEST, "Invalid Parameters");
+            CustomMessage message = new CustomMessage(HttpServletResponse.SC_BAD_REQUEST, "Invalid Parameters");
 
-//            response.setStatus(message.getStatus());
-//            resposta = gson.toJson(message);
+            response.setStatus(message.getStatus());
+            resposta = gson.toJson(message);
 
-            response.setStatus(404);
-            resposta = gson.toJson("teste");
 
 
 
         } else {
             try {
-  //              HttpSession sessao = request.getSession(true);
+                HttpSession sessao = request.getSession(true);
                 clienteService.inserir(clienteRequest);
- //               List<Cliente> clientes = clienteService.listAll();
-//                clientes.add(clienteRequest);
- //               sessao.setAttribute(CLIENTES_SESSION, clientes);
-//                resposta = gson.toJson(clientes);
+                resposta = gson.toJson(clienteRequest);
             } catch (NoClientException noClientException) {
                 response.setStatus(400);
-               // resposta = gson.toJson(new CustomMessage(400, noClientException.getMessage()));
-                resposta = gson.toJson("cliente não encontradoZZZZ");
+                resposta = gson.toJson(new CustomMessage(400, noClientException.getMessage()));
+
             }
         }
         print.write(resposta);
